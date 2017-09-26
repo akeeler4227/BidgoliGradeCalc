@@ -1,7 +1,7 @@
 # BidgoliGradeCalc
 This is a shitty console-based grade calculator that was created due to a CS professor who refuses to post online grades.
 
-# HOW TO USE
+# How to Use
 When you first enter the program, it will prompt you to either enter a grade or view the grade history. The grade history is pretty self-explanatory, it is the history of grades that is stored in a file and are used to calculate total course percentage.
 
 If you choose to enter a grade, you will be asked to enter your recieved grade and the max possible grade. After that, your total grade percentage, including your newly entered grade, will appear. You will then be given the option to re-enter that grade. If you choose not to re-enter it, you will be asked if you want to enter another grade. If you choose not to, the program will terminate.
