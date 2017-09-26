@@ -1,5 +1,5 @@
 # BidgoliGradeCalc
-This is a shitty console-based grade calculator that was created due to a CS professor who refuses to post online grades.
+This is a shitty console-based grade calculator that was created because of a CS professor who refuses to post online grades.
 
 # How to Use
 When you first enter the program, it will prompt you to either enter a grade or view the grade history. The grade history is pretty self-explanatory, it is the history of grades that is stored in a file and are used to calculate total course percentage.
