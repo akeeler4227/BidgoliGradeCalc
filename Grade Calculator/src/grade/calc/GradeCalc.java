@@ -36,9 +36,8 @@ public class GradeCalc {
 		
 		if(!fileInput.hasNext()) { // This will activate if the grade history file is empty
 			System.out.println("The grade history is empty.");
-			System.out.println("Redirecting to grade entry...");
 			System.out.println(); // Blank line
-			empty = true;
+			empty = true; // Skips the percentage grade calculation and option to erase the grade history
 		}
 		
 		if(!empty) {
@@ -59,8 +58,12 @@ public class GradeCalc {
 			
 			// Create two digit format for percentage
 			DecimalFormat df = new DecimalFormat("0.##");
-			// Print percentage grade
-			System.out.println("Percentage grade: " + df.format((double)recievedScoreSum / maxScoreSum * 100) + "%");
+			// Calculate percentage grade
+			double percentageGrade = (double)recievedScoreSum / maxScoreSum * 100;
+			System.out.println("Percentage grade: " + df.format(percentageGrade) + "%");
+			// Calculate letter grade
+			System.out.println("Letter grade: " + calculateLetterGrade(percentageGrade));
+			
 			
 			System.out.print("Would you like to erase the grade history? Y/N ");
 			switch(userInput.next()){
@@ -74,19 +77,19 @@ public class GradeCalc {
 				case "N": case "n":
 					break;
 			}
-			
-			System.out.print("Would you like to enter a new grade? Y/N ");
-			switch(userInput.next()) {
-			case "Y": case "y":
-				System.out.println("Redirecting to grade entry...");
-				System.out.println(); // Blank line
-				break;
-			default:
-				System.out.println("I'm just going to assume you don't want to since you can't seem to follow directions");
-			case "N": case "n":
-				System.out.println("Exiting program...");
-				System.exit(1);
-			}
+		}
+		
+		System.out.print("Would you like to enter a new grade? Y/N ");
+		switch(userInput.next()) {
+		case "Y": case "y":
+			System.out.println("Redirecting to grade entry...");
+			System.out.println(); // Blank line
+			break;
+		default:
+			System.out.println("I'm just going to assume you don't want to since you can't seem to follow directions");
+		case "N": case "n":
+			System.out.println("Exiting program...");
+			System.exit(1);
 		}
 	}
 
@@ -158,6 +161,37 @@ public class GradeCalc {
 		overwrite.close();
 	}
 	
+	private static String calculateLetterGrade (double percentageGrade) {
+		String letterGrade;
+		if(percentageGrade >= 100)
+			letterGrade = "A+";
+		else if(percentageGrade >= 93)
+			letterGrade = "A";
+		else if(percentageGrade >= 90)
+			letterGrade = "A-";
+		else if(percentageGrade >= 87)
+			letterGrade = "B+";
+		else if(percentageGrade >= 83)
+			letterGrade = "B";
+		else if(percentageGrade >= 80)
+			letterGrade = "B-";
+		else if(percentageGrade >= 77)
+			letterGrade = "C+";
+		else if(percentageGrade >= 73)
+			letterGrade = "C";
+		else if(percentageGrade >= 70)
+			letterGrade = "C-";
+		else if(percentageGrade >= 67)
+			letterGrade = "D+";
+		else if(percentageGrade >= 63)
+			letterGrade = "D";
+		else if(percentageGrade >= 60)
+			letterGrade = "D-";
+		else
+			letterGrade = "F";
+		return letterGrade;
+	}
+	
 	public static void main(String[] args) throws IOException {
 		if (!scores.exists()) scores.createNewFile();
 		// Initialize variables
@@ -218,7 +252,11 @@ public class GradeCalc {
 			System.out.println("Total score: " + df.format(recievedScoreSum));
 			System.out.println("Total max score: " + df.format(maxScoreSum));
 			System.out.println(); // Blank line
-			System.out.println("Percentage grade: " + df.format((double)recievedScoreSum / maxScoreSum * 100) + "%");
+			// Calculate percentage grade
+			double percentageGrade = (double)recievedScoreSum / maxScoreSum * 100;
+			System.out.println("Percentage grade: " + df.format(percentageGrade) + "%");
+			// Calculate letter grade
+			System.out.println("Letter grade: " + calculateLetterGrade(percentageGrade));
 			
 			// Prompt the user to re-enter value
 			System.out.print("Would you like to re-enter this grade? Y/N ");
